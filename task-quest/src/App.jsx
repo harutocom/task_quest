@@ -15,20 +15,24 @@ function App(){
     }
   }
   return(
-    <div style={{padding: "20px"}}>
-      <h1>タスクエ</h1>
+    <div className='body'>
+      <header className='header'>
+        <h1>Todo</h1>
+      </header>
       {/* テキストエリアを表示するボタン */}
-      <TaskAdd onClick={() => setIsInputVisible(true)}>QEST作成</TaskAdd>
+      <div className='taskAddButon-container'>
+        <TaskAdd onClick={() => setIsInputVisible(true)}></TaskAdd>
+      </div>
       {/* isInputVisibleがtrueの時テキストエリア表示 */}
       {isInputVisible && (
         <div>
           <input type="text" value={taskInput} 
           onChange={(e) => setTaskInput(e.target.value)}
           placeholder='クエスト内容を入力して'/>
-          <TaskAdd onClick={addTask}>QEST追加</TaskAdd>
+          <TaskAdd onClick={addTask}></TaskAdd>
         </div>
       )}
-      <h1>QEST一覧</h1>
+      <h1>タスク一覧</h1>
       <ul>
         {tasks.map((task, index) => (<li key={index}>{task}</li>))}
       </ul>
