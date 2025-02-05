@@ -1,5 +1,5 @@
-const TaskAdd = ({onClick}) => {
+const taskAdd = ({onClick}) => {
     return <button className="taskAddButton" onClick={onClick}>ボタン</button>;
 }
 
-export default TaskAdd;
+export default taskAdd;

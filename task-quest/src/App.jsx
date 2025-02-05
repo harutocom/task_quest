@@ -19,7 +19,7 @@ function App(){
         <h1>Todo</h1>
       </header>
       {/* テキストエリアを表示するボタン */}
-      <div className='taskAddButon-container'>
+      <div className='taskAddButton-container'>
         <TaskAdd onClick={() => setIsInputVisible(true)}></TaskAdd>
       </div>
       {/* isInputVisibleがtrueの時テキストエリア表示 */}
