@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import TaskAdd from './components/taskAdd/taskAdd'
 import './App.css'
-
 
 function App(){
   const [isInputVisible,setIsInputVisible] = useState(false);  //texstarea表示/非表示
@@ -25,10 +24,10 @@ function App(){
       </div>
       {/* isInputVisibleがtrueの時テキストエリア表示 */}
       {isInputVisible && (
-        <div>
+        <div className='textarea'>
           <input type="text" value={taskInput} 
           onChange={(e) => setTaskInput(e.target.value)}
-          placeholder='クエスト内容を入力して'/>
+          placeholder='内容を入力して'/>
           <TaskAdd onClick={addTask}></TaskAdd>
         </div>
       )}
