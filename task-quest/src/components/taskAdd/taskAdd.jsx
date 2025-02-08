@@ -1,7 +1,5 @@
-import React from "react";
-
-const TaskAdd = ({onClick}) => {
-    return <button onClick={onClick}>QUEST作成</button>;
+const taskAdd = ({onClick}) => {
+    return <button className="taskAddButton" onClick={onClick}>ボタン</button>;
 }
 
-export default TaskAdd;
+export default taskAdd;
