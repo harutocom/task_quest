@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import TaskAdd from './components/taskAdd/taskAdd'
 import './App.css'
+import TaskDelete from './components/taskDelete/taskDelete';
 
 function App(){
   const [isInputVisible,setIsInputVisible] = useState(false);  //texstarea表示/非表示
@@ -13,6 +14,16 @@ function App(){
       setTaskInput("");
     }
   }
+
+  const deleteTask = (index) => {
+    if (!Array.isArray(tasks)) {
+      console.error('tasks is not an array!');
+      return;  // tasks が配列でない場合は処理を中断
+    }
+    const newTasks = tasks.filter((_,i) => i != index);
+    setTasks(newTasks);
+  }
+
   return(
     <div className='body'>
       <header className='header'>
@@ -33,7 +44,10 @@ function App(){
       )}
       <h1>タスク一覧</h1>
       <ul>
-        {tasks.map((task, index) => (<li key={index}>{task}</li>))}
+        {tasks.map((task, index) => (<li key={index}>
+          {task}
+          <TaskDelete onClick={() => deleteTask(index)}></TaskDelete>
+        </li>))}
       </ul>
     </div>
   );
