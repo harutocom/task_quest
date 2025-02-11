@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import TaskAdd from './components/taskAdd/taskAdd'
 import './App.css'
-import TaskDelete from './components/taskDelete/taskDelete';
+// import TaskDelete from './components/taskDelete/taskDelete';
 import TaskEdit from './components/taskEdit/taskEdit';
-import TaskDone from './components/taskDone/taskDone';
+// import TaskDone from './components/taskDone/taskDone';
+import TaskList from './components/TaskList/TaskList';
 
 function App(){
   const [isInputVisible,setIsInputVisible] = useState(false);  //texstarea表示/非表示
@@ -84,17 +85,7 @@ function App(){
         </div>      
       )}
       <h1>タスク一覧</h1>
-      <ul>
-        {tasks.map((task, index) => (<li key={index}>
-          <TaskDone onClick={() => doneTask(index)}></TaskDone>
-          {task}
-          <TaskDelete onClick={() => deleteTask(index)}></TaskDelete>
-          <TaskEdit onClick={() => {
-            setIsInputVisible(true);
-            setMode(1);
-            setIndex(index)}}></TaskEdit>
-        </li>))}
-      </ul>
+      <TaskList tasks={tasks} doneTask={doneTask} editTask={editTask} deleteTask={deleteTask}/>
 
       <h1>完了タスク一覧</h1>
       <ul>
