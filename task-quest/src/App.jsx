@@ -50,8 +50,9 @@ function App(){
   //完了したタスクを別の場所に移す関数
   const doneTask = (index) => {
     const newTasks = tasks.filter((_,i) => i != index);
-    setTasksDone(tasks[index]);
+    const newtasksDone = [...tasksDone,tasks[index]]
     setTasks(newTasks);
+    setTasksDone(newtasksDone)
   }
 
   return(
@@ -96,6 +97,17 @@ function App(){
       </ul>
 
       <h1>完了タスク一覧</h1>
+      <ul>
+        {tasksDone.map((task, index) => (<li key={index}>
+          {task}
+        </li>))}
+      </ul>
+
+      {/* <ul>
+        {tasksDone.map((doneTask, index) => (<li key={index}>
+          {doneTask}
+        </li>))}
+      </ul> */}
     </div>
   );
 }
