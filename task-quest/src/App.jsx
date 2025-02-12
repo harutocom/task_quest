@@ -1,15 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TaskAdd from './components/taskAdd/taskAdd'
 import './App.css'
-// import TaskDelete from './components/taskDelete/taskDelete';
 import TaskEdit from './components/taskEdit/taskEdit';
-// import TaskDone from './components/taskDone/taskDone';
 import TaskList from './components/TaskList/TaskList';
 
 function App(){
   const [isInputVisible,setIsInputVisible] = useState(false);  //texstarea表示/非表示
   const [index,setIndex] = useState();  //taskのindex
-  const [mode,setMode] = useState();  //入力欄をタスク設定と編集に切り替えるための変数
+  const [mode,setMode] = useState(0);  //入力欄をタスク設定と編集に切り替えるための変数
   const [taskEdit,setTaskEdit] = useState("");  //編集後のタスクの内容
   const [taskInput,setTaskInput] = useState("");  //入力されたタスクの内容
   const [tasks,setTasks] = useState([]);  //タスク一覧
@@ -36,13 +34,11 @@ function App(){
   }
 
   //タスクを編集する関数
-  const editTask = () => {
-    console.log(1)
+  const editTask = (index) => {
     if(taskEdit.trim() != "") {
       const newTasks = [...tasks];
       newTasks[index] = taskEdit;
       setTasks(newTasks);
-      // tasks[index] = taskEdit;
       setTaskEdit("");
     }
     setIsInputVisible(false);
@@ -56,6 +52,26 @@ function App(){
     setTasksDone(newtasksDone)
   }
 
+  // 入力モードにする関数
+  const modeInput = () => {
+    setMode(0);
+  };
+
+  // 編集モードにする関数
+  const modeEdit = (index) => {
+    setMode(1);
+    setIndex(index)  // editTask用のindexを取得
+  };
+
+  // テキストエリアを表示させる関数
+  useEffect(() => {
+    if (mode === 1){
+      setIsInputVisible(true);
+    };
+  },[mode])
+
+
+
   return(
     <div className='body'>
       <header className='header'>
@@ -65,7 +81,7 @@ function App(){
       <div className='taskAddButton-container'>
         <TaskAdd onClick={() => {
           setIsInputVisible(true)
-          setMode(0)} }></TaskAdd>
+          modeInput()} }></TaskAdd>
       </div>
       {/* isInputVisibleがtrueの時テキストエリア表示 */}
       {isInputVisible && mode === 0 && (
@@ -77,15 +93,19 @@ function App(){
         </div>
       )}
       {isInputVisible && mode === 1 && (
-          <div className='textarea'>
+        <div className='textarea'>
           <input type="text" value={taskEdit} 
           onChange={(e) => setTaskEdit(e.target.value)}
           placeholder='内容を入力して'/>
-          <TaskEdit onClick={editTask}></TaskEdit>
+          <TaskEdit onClick={() => {editTask(index);}}></TaskEdit>
         </div>      
       )}
       <h1>タスク一覧</h1>
-      <TaskList tasks={tasks} doneTask={doneTask} editTask={editTask} deleteTask={deleteTask}/>
+      <TaskList 
+      tasks={tasks} 
+      doneTask={doneTask} 
+      modeEdit={modeEdit}  
+      deleteTask={deleteTask}/>
 
       <h1>完了タスク一覧</h1>
       <ul>
@@ -93,12 +113,6 @@ function App(){
           {task}
         </li>))}
       </ul>
-
-      {/* <ul>
-        {tasksDone.map((doneTask, index) => (<li key={index}>
-          {doneTask}
-        </li>))}
-      </ul> */}
     </div>
   );
 }

@@ -1,12 +1,25 @@
-const TaskItem = ({task, onDone, onEdit, onDelete}) => {
+import TaskDone from "../taskDone/taskDone";
+import TaskEdit from "../taskEdit/taskEdit";
+import TaskDelete from "../taskDelete/taskDelete";
+import PropTypes from 'prop-types';
+
+
+const TaskItem = ({task, onDone, modeEdit, onDelete}) => {
     return (
         <li>
-            <button onClick={onDone}>完了</button>
+            <TaskDone onClick={onDone}>完了</TaskDone>
             {task}
-            <button onClick={onEdit}>編集</button>
-            <button onClick={onDelete}>削除</button>
+            <TaskEdit onClick={modeEdit}>編集</TaskEdit>
+            <TaskDelete onClick={onDelete}>削除</TaskDelete>
         </li>
     );
+};
+
+TaskItem.propTypes = {
+    task: PropTypes.string.isRequired,
+    onDone: PropTypes.func.isRequired,
+    modeEdit: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired
 };
 
 export default TaskItem;

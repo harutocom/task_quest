@@ -1,16 +1,16 @@
 import TaskItem from "./TaskItem";
 import PropTypes from 'prop-types';
 
-const TaskList = ({tasks, doneTask, editTask, deleteTask}) =>{
+const TaskList = ({tasks, doneTask, modeEdit, deleteTask}) =>{
     return (
     <ul>
         {tasks.map((task, index) => (
             <TaskItem 
             key={index} 
             task={task} 
-            onDone={doneTask} 
-            onEdit={editTask} 
-            onDelete={deleteTask}/>
+            onDone={() => doneTask(index)} 
+            modeEdit={() => modeEdit(index)}
+            onDelete={() => deleteTask(index)}/>
         ))}
     </ul>
     )
@@ -21,7 +21,7 @@ const TaskList = ({tasks, doneTask, editTask, deleteTask}) =>{
 TaskList.propTypes = {
     tasks: PropTypes.array.isRequired,
     doneTask: PropTypes.func.isRequired,
-    editTask: PropTypes.func.isRequired,
+    modeEdit: PropTypes.func.isRequired,
     deleteTask: PropTypes.func.isRequired
 };
 
