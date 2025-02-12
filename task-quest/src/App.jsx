@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css'
 import TaskList from './components/TaskList/TaskList';
 import TextArea from './components/TextArea/TextArea';
+import CompTaskList from './components/CompTaskList/CompTaskList';
 
 function App(){
   const [isInputVisible,setIsInputVisible] = useState(false);  //texstarea表示/非表示
@@ -109,11 +110,7 @@ function App(){
 
       {/* 完了タスク一覧 */}
       <h1>完了タスク一覧</h1>
-      <ul>
-        {tasksDone.map((task, index) => (<li key={index}>
-          {task}
-        </li>))}
-      </ul>
+      <CompTaskList tasksDone={tasksDone}/>
     </div>
   );
 }
