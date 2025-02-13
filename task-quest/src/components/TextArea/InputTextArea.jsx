@@ -1,7 +1,7 @@
 import TaskAdd from '../taskAdd/taskAdd'
 import PropTypes from 'prop-types';
 
-const InputTextArea = ({onChange, taskInput, addTask}) => {
+const InputTextArea = ({onChange, taskInput, addTask, status, selectedValue, handleRadioChange}) => {
     const changeTaskInput = (value) => {
         onChange(value);
     };
@@ -11,6 +11,17 @@ const InputTextArea = ({onChange, taskInput, addTask}) => {
     <input type="text" value={taskInput} 
     onChange={(e) => changeTaskInput(e.target.value)}
     placeholder='内容を入力して'/>
+    {status.map((status,index) => (
+      <label key={index}>
+        <input 
+        type="radio"
+        name='status'
+        value={status.name}
+        checked={selectedValue === status.name}
+        onChange={() => handleRadioChange(status.name)} />
+        {status.name}
+      </label>
+    ))}
     <TaskAdd onClick={addTask}></TaskAdd>
   </div>
   )
@@ -19,7 +30,10 @@ const InputTextArea = ({onChange, taskInput, addTask}) => {
 InputTextArea.propTypes = {
     onChange: PropTypes.func.isRequired,
     taskInput: PropTypes.string.isRequired,
-    addTask: PropTypes.func.isRequired
+    addTask: PropTypes.func.isRequired,
+    status: PropTypes.array.isRequired,
+    selectedValue: PropTypes.string.isRequired,
+    handleRadioChange: PropTypes.func.isRequired
 }
 
 export default InputTextArea

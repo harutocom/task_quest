@@ -4,7 +4,7 @@ const CompTaskList = ({tasksDone}) => {
   return (
     <ul>
         {tasksDone.map((task, index) => (<li key={index}>
-        {task}
+        {task.name}
         </li>))}
     </ul>
     );

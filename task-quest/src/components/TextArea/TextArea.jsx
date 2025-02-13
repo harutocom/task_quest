@@ -4,7 +4,8 @@ import EditTextArea from "./EditTextArea"
 import PropTypes from 'prop-types';
 
 function TextArea({setIsInputVisible,modeInput,isInputVisible,changeTaskInput,
-    taskInput,addTask,changeTaskEdit,taskEdit,editTask,index,mode}) {
+    taskInput,addTask,changeTaskEdit,taskEdit,editTask,index,mode,status,
+    selectedValue, handleRadioChange}) {
   return (
     <div>
         {/* テキストエリアを表示するボタン */}
@@ -18,7 +19,10 @@ function TextArea({setIsInputVisible,modeInput,isInputVisible,changeTaskInput,
         <InputTextArea 
         onChange={changeTaskInput} 
         taskInput={taskInput} 
-        addTask={addTask}/>
+        addTask={addTask}
+        status={status}
+        selectedValue={selectedValue}
+        handleRadioChange={handleRadioChange}/>
         )}
         {isInputVisible && mode === 1 && (
         <EditTextArea 
@@ -42,7 +46,11 @@ TextArea.propTypes = {
     taskEdit: PropTypes.string.isRequired,
     editTask: PropTypes.func.isRequired,
     index: PropTypes.number.isRequired,
-    mode: PropTypes.number.isRequired
+    mode: PropTypes.number.isRequired,
+    status: PropTypes.array.isRequired,
+    selectedValue: PropTypes.string.isRequired,
+    handleRadioChange: PropTypes.func.isRequired
+    
 }
 
 
