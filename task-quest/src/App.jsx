@@ -3,6 +3,8 @@ import './App.css'
 import TaskList from './components/TaskList/TaskList';
 import TextArea from './components/TextArea/TextArea';
 import CompTaskList from './components/CompTaskList/CompTaskList';
+import StatusTextArea from './components/Status/StatusTextArea';
+import Status from './components/Status/Status';
 
 function App(){
   const [isInputVisible,setIsInputVisible] = useState(false);  //texstarea表示/非表示
@@ -12,6 +14,8 @@ function App(){
   const [taskInput,setTaskInput] = useState("");  //入力されたタスクの内容
   const [tasks,setTasks] = useState([]);  //タスク一覧
   const [tasksDone,setTasksDone] = useState([]);  //完了後タスク一覧
+  const [status,setStatus] = useState([]);  //ステータスの配列
+  const [statusInput, setStatusInput] = useState('');
 
 
   //タスクを追加する関数
@@ -80,6 +84,15 @@ function App(){
     setTaskEdit(newTaskEdit);
   };
 
+  // statusを追加する関数
+  const addStatus = () => {
+    if(statusInput.trim() != "") {
+      const newItem = { name: statusInput };
+      setStatus([...status, newItem]);
+    }
+    setStatusInput('');
+  }
+
   return(
     <div className='body'>
       <header className='header'>
@@ -111,6 +124,14 @@ function App(){
       {/* 完了タスク一覧 */}
       <h1>完了タスク一覧</h1>
       <CompTaskList tasksDone={tasksDone}/>
+
+      {/* ステータスインプット */}
+      <h1>ステータス入力欄</h1>
+      <StatusTextArea statusInput={statusInput} setStatusInput={setStatusInput} addStatus={addStatus}/>
+
+      {/* ステータス */}
+      <h1>ステータス</h1>
+      <Status status={status}/>
     </div>
   );
 }
