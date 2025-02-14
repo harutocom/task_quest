@@ -109,7 +109,9 @@ function App(){
 
   // statusを削除する関数
   const deleteStatus = () => {
-
+    const newStatus = status.filter(item => item.name != selectedDeleteStatus);
+    setStatus(newStatus);
+    setIsDeleteModalOpen(false);
   }
 
   // selectedValueを更新する関数
@@ -165,7 +167,7 @@ function App(){
       {/* ステータス */}
       <h1>ステータス</h1>
       <StatusDeleteModalButton setIsDeleteModalOpen={setIsDeleteModalOpen}/>
-      <StatusDeleteModal isDeleteModalOpen={isDeleteModalOpen} status={status} selectedDeleteStatus={selectedDeleteStatus} handleDeleteStatusRadioChange={handleDeleteStatusRadioChange}/>
+      <StatusDeleteModal isDeleteModalOpen={isDeleteModalOpen} status={status} selectedDeleteStatus={selectedDeleteStatus} handleDeleteStatusRadioChange={handleDeleteStatusRadioChange} deleteStatus={deleteStatus}/>
       <Status status={status}/>
     </div>
   );

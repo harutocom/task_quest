@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import styles from './StatusDeleteModal.module.css'
+import StatusDeleteButton from './StatusDeleteButton';
 
-const StatusDeleteModal = ({isDeleteModalOpen, status, selectedDeleteStatus, handleDeleteStatusRadioChange}) => {
+const StatusDeleteModal = ({isDeleteModalOpen, status, selectedDeleteStatus, handleDeleteStatusRadioChange, deleteStatus}) => {
   return (
     <div>
         {isDeleteModalOpen && (
@@ -19,6 +20,7 @@ const StatusDeleteModal = ({isDeleteModalOpen, status, selectedDeleteStatus, han
                             {element.name}
                         </label>
                     ))}
+                    <StatusDeleteButton deleteStatus={deleteStatus}/>
             </div>
         </div>
 
@@ -33,6 +35,7 @@ StatusDeleteModal.propTypes = {
     status: PropTypes.array.isRequired,
     selectedDeleteStatus: PropTypes.string,
     handleDeleteStatusRadioChange: PropTypes.func.isRequired,
+    deleteStatus: PropTypes.func.isRequired
 }
 
 export default StatusDeleteModal
