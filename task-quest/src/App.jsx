@@ -55,9 +55,11 @@ function App(){
   //完了したタスクを別の場所に移す関数
   const doneTask = (index) => {
     const newTasks = tasks.filter((_,i) => i != index);
-    const newtasksDone = [...tasksDone,tasks[index]]
+    const newtasksDone = [...tasksDone,tasks[index]];
     setTasks(newTasks);
-    setTasksDone(newtasksDone)
+    setTasksDone(newtasksDone);
+    const statusIndex = status.findIndex(item => item.name === tasks[index].status);
+    status[statusIndex].value += tasks[index].value;
   }
 
   // 入力モードにする関数
@@ -91,7 +93,7 @@ function App(){
   // statusを追加する関数
   const addStatus = () => {
     if(statusInput.trim() != "") {
-      const newItem = { name: statusInput };
+      const newItem = { name: statusInput, value: 0 };
       setStatus([...status, newItem]);
     }
     setStatusInput('');

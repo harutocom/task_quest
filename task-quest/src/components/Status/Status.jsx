@@ -4,7 +4,7 @@ const Status = ({status}) => {
   return (
     <ul>
         {status.map((statusItem, index) => (<li key={index}>
-        {statusItem.name}
+        {statusItem.name} {' '} {statusItem.value}
         </li>))}
     </ul>
   )
