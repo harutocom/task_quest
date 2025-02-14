@@ -21,7 +21,7 @@ function App(){
   const [selectedValue, setSelectedValue] = useState('');  //ラジオボタンで現在選ばれている値
   const [statusValueInput, setStatusValueInput] = useState('');  //ステータス値を保持する変数
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);  //ステータス項目の削除モーダルを管理
-  const [selectedDeleteStatus, setSelectedDeleteStatus] = useState('');
+  const [selectedDeleteStatus, setSelectedDeleteStatus] = useState('');  //選択されている削除するステータスの項目
 
 
   //タスクを追加する関数
@@ -162,12 +162,21 @@ function App(){
 
       {/* ステータスインプット */}
       <h1>ステータス入力欄</h1>
-      <StatusTextArea statusInput={statusInput} setStatusInput={setStatusInput} addStatus={addStatus}/>
+      <StatusTextArea 
+      statusInput={statusInput} 
+      setStatusInput={setStatusInput} 
+      addStatus={addStatus}/>
 
       {/* ステータス */}
       <h1>ステータス</h1>
       <StatusDeleteModalButton setIsDeleteModalOpen={setIsDeleteModalOpen}/>
-      <StatusDeleteModal isDeleteModalOpen={isDeleteModalOpen} status={status} selectedDeleteStatus={selectedDeleteStatus} handleDeleteStatusRadioChange={handleDeleteStatusRadioChange} deleteStatus={deleteStatus}/>
+      <StatusDeleteModal 
+      isDeleteModalOpen={isDeleteModalOpen} 
+      status={status} 
+      selectedDeleteStatus={selectedDeleteStatus} 
+      handleDeleteStatusRadioChange={handleDeleteStatusRadioChange} 
+      deleteStatus={deleteStatus}
+      setIsDeleteModalOpen={setIsDeleteModalOpen}/>
       <Status status={status}/>
     </div>
   );

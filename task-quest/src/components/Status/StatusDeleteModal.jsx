@@ -2,13 +2,17 @@ import PropTypes from 'prop-types';
 import styles from './StatusDeleteModal.module.css'
 import StatusDeleteButton from './StatusDeleteButton';
 
-const StatusDeleteModal = ({isDeleteModalOpen, status, selectedDeleteStatus, handleDeleteStatusRadioChange, deleteStatus}) => {
+const StatusDeleteModal = ({isDeleteModalOpen, status, selectedDeleteStatus, handleDeleteStatusRadioChange, deleteStatus, setIsDeleteModalOpen}) => {
   return (
     <div>
         {isDeleteModalOpen && (
             <div className={styles.modalOverlay}>
                 <div className={styles.modalContent}>
-                    <h3>削除するステータス項目を選んでください</h3>
+                    {status.length == 0 ? (
+                        <h3>削除できるステータス項目はありません</h3>
+                    ) : (
+                        <h3>削除するステータス項目を選んでください</h3>
+                    )}
                     {status.map((element, index) => (
                         <label key={index} >
                             <input
@@ -20,7 +24,7 @@ const StatusDeleteModal = ({isDeleteModalOpen, status, selectedDeleteStatus, han
                             {element.name}
                         </label>
                     ))}
-                    <StatusDeleteButton deleteStatus={deleteStatus}/>
+                    <StatusDeleteButton deleteStatus={deleteStatus} setIsDeleteModalOpen={setIsDeleteModalOpen}/>
             </div>
         </div>
 
@@ -35,7 +39,8 @@ StatusDeleteModal.propTypes = {
     status: PropTypes.array.isRequired,
     selectedDeleteStatus: PropTypes.string,
     handleDeleteStatusRadioChange: PropTypes.func.isRequired,
-    deleteStatus: PropTypes.func.isRequired
+    deleteStatus: PropTypes.func.isRequired,
+    setIsDeleteModalOpen: PropTypes.func.isRequired
 }
 
 export default StatusDeleteModal
