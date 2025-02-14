@@ -9,6 +9,7 @@ const TaskList = ({tasks, doneTask, modeEdit, deleteTask}) =>{
             key={index} 
             task={task.name}
             status={task.status}
+            value={task.value}
             onDone={() => doneTask(index)} 
             modeEdit={() => modeEdit(index)}
             onDelete={() => deleteTask(index)}/>

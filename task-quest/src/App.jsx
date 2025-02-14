@@ -17,14 +17,16 @@ function App(){
   const [status,setStatus] = useState([]);  //ステータスの配列
   const [statusInput, setStatusInput] = useState('');  //ステータスの入力
   const [selectedValue, setSelectedValue] = useState('');  //ラジオボタンで現在選ばれている値
+  const [statusValueInput, setStatusValueInput] = useState('');
 
 
   //タスクを追加する関数
   const addTask = () => {
     if(taskInput.trim() != "") {
-      const newTask = {name: taskInput, status: selectedValue};
+      const newTask = {name: taskInput, status: selectedValue, value: statusValueInput};
       setTasks([...tasks,newTask]);
       setTaskInput("");
+      setStatusValueInput('');
     }
     setIsInputVisible(false);
   }
@@ -100,6 +102,10 @@ function App(){
     setSelectedValue(value)
   }
 
+  const handleStatusValueChange = (value) => {
+    setStatusValueInput(value);
+  }
+
   return(
     <div className='body'>
       <header className='header'>
@@ -121,7 +127,9 @@ function App(){
       mode={mode}
       status={status}
       selectedValue={selectedValue}
-      handleRadioChange={handleRadioChange}/>
+      handleRadioChange={handleRadioChange}
+      statusValueInput={statusValueInput}
+      handleStatusValueChange={handleStatusValueChange}/>
 
       {/* タスク一覧 */}
       <h1>タスク一覧</h1>

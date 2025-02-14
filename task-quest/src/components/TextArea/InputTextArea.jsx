@@ -1,7 +1,8 @@
 import TaskAdd from '../taskAdd/taskAdd'
 import PropTypes from 'prop-types';
 
-const InputTextArea = ({onChange, taskInput, addTask, status, selectedValue, handleRadioChange}) => {
+const InputTextArea = ({onChange, taskInput, addTask, status, selectedValue,
+    handleRadioChange, statusValueInput, handleStatusValueChange}) => {
     const changeTaskInput = (value) => {
         onChange(value);
     };
@@ -22,6 +23,13 @@ const InputTextArea = ({onChange, taskInput, addTask, status, selectedValue, han
         {status.name}
       </label>
     ))}
+    <input type="number" 
+    value={statusValueInput}
+    onChange={(e) => {
+      const newValue = e.target.value;
+      handleStatusValueChange(newValue === '' ? '' : Number(e.target.value) || 0)}}
+    placeholder='得られるポイントを入力'
+    min={0}/>
     <TaskAdd onClick={addTask}></TaskAdd>
   </div>
   )
@@ -33,7 +41,9 @@ InputTextArea.propTypes = {
     addTask: PropTypes.func.isRequired,
     status: PropTypes.array.isRequired,
     selectedValue: PropTypes.string.isRequired,
-    handleRadioChange: PropTypes.func.isRequired
+    handleRadioChange: PropTypes.func.isRequired,
+    statusValueInput: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    handleStatusValueChange: PropTypes.func.isRequired
 }
 
 export default InputTextArea
