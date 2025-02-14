@@ -5,6 +5,8 @@ import TextArea from './components/TextArea/TextArea';
 import CompTaskList from './components/CompTaskList/CompTaskList';
 import StatusTextArea from './components/Status/StatusTextArea';
 import Status from './components/Status/Status';
+import StatusDeleteModalButton from './components/Status/StatusDeleteModalButton';
+import StatusDeleteModal from './components/Status/StatusDeleteModal';
 
 function App(){
   const [isInputVisible,setIsInputVisible] = useState(false);  //texstarea表示/非表示
@@ -17,7 +19,9 @@ function App(){
   const [status,setStatus] = useState([]);  //ステータスの配列
   const [statusInput, setStatusInput] = useState('');  //ステータスの入力
   const [selectedValue, setSelectedValue] = useState('');  //ラジオボタンで現在選ばれている値
-  const [statusValueInput, setStatusValueInput] = useState('');
+  const [statusValueInput, setStatusValueInput] = useState('');  //ステータス値を保持する変数
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);  //ステータス項目の削除モーダルを管理
+  const [selectedDeleteStatus, setSelectedDeleteStatus] = useState('');
 
 
   //タスクを追加する関数
@@ -99,6 +103,15 @@ function App(){
     setStatusInput('');
   }
 
+  const handleDeleteStatusRadioChange = (value) => {
+    setSelectedDeleteStatus(value)
+  }
+
+  // statusを削除する関数
+  const deleteStatus = () => {
+
+  }
+
   // selectedValueを更新する関数
   const handleRadioChange = (value) => {
     setSelectedValue(value)
@@ -151,6 +164,8 @@ function App(){
 
       {/* ステータス */}
       <h1>ステータス</h1>
+      <StatusDeleteModalButton setIsDeleteModalOpen={setIsDeleteModalOpen}/>
+      <StatusDeleteModal isDeleteModalOpen={isDeleteModalOpen} status={status} selectedDeleteStatus={selectedDeleteStatus} handleDeleteStatusRadioChange={handleDeleteStatusRadioChange}/>
       <Status status={status}/>
     </div>
   );
