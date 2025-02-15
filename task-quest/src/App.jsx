@@ -3,7 +3,6 @@ import './App.css'
 import TaskList from './components/TaskList/TaskList';
 import TextArea from './components/TextArea/TextArea';
 import CompTaskList from './components/CompTaskList/CompTaskList';
-import StatusTextArea from './components/Status/StatusTextArea';
 import Status from './components/Status/Status';
 import StatusDeleteModalButton from './components/Status/StatusDeleteModalButton';
 import StatusDeleteModal from './components/Status/StatusDeleteModal';
@@ -101,6 +100,7 @@ function App(){
       setStatus([...status, newItem]);
     }
     setStatusInput('');
+    setIsDeleteModalOpen(false);
   }
 
   const handleDeleteStatusRadioChange = (value) => {
@@ -161,11 +161,11 @@ function App(){
       <CompTaskList tasksDone={tasksDone}/>
 
       {/* ステータスインプット */}
-      <h1>ステータス入力欄</h1>
+      {/* <h1>ステータス入力欄</h1>
       <StatusTextArea 
       statusInput={statusInput} 
       setStatusInput={setStatusInput} 
-      addStatus={addStatus}/>
+      addStatus={addStatus}/> */}
 
       {/* ステータス */}
       <h1>ステータス</h1>
@@ -176,7 +176,10 @@ function App(){
       selectedDeleteStatus={selectedDeleteStatus} 
       handleDeleteStatusRadioChange={handleDeleteStatusRadioChange} 
       deleteStatus={deleteStatus}
-      setIsDeleteModalOpen={setIsDeleteModalOpen}/>
+      setIsDeleteModalOpen={setIsDeleteModalOpen}
+      statusInput={statusInput}
+      setStatusInput={setStatusInput}
+      addStatus={addStatus}/>
       <Status status={status}/>
     </div>
   );
