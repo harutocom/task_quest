@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 
 const StatusDeleteModalButton = ({setIsDeleteModalOpen}) => {
-  return <button onClick={() => {setIsDeleteModalOpen(true)}}>ステータス削除</button>;
+  return <button onClick={() => {setIsDeleteModalOpen(true)}}>ステータス設定</button>;
 }
 
 StatusDeleteModalButton.propTypes = {

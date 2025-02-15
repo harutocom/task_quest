@@ -2,11 +2,13 @@ import PropTypes from 'prop-types';
 
 const Status = ({status}) => {
   return (
-    <ul>
+    <div>
+      <ul>
         {status.map((statusItem, index) => (<li key={index}>
         {statusItem.name} {' '} {statusItem.value}
         </li>))}
-    </ul>
+      </ul>
+    </div>
   )
 }
 
