@@ -1,0 +1,41 @@
+/* モーダルの背景のオーバーレイ */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center; /* 縦方向に中央揃え */
+    justify-content: center; /* 横方向に中央揃え */
+    z-index: 1000; /* モーダルを最前面に表示 */
+  }
+  
+  /* モーダルのコンテンツ部分 */
+  .modalContent {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border: 5px solid white;
+    border-radius: 10px;
+    width: 300px; /* モーダルの幅 */
+    text-align: center; /* テキストを左揃え */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽いシャドウを追加 */
+    overflow-y: auto;
+  }
+  
+  /* ラジオボタンをリスト形式で表示 */
+  label {
+    display: block;
+    margin-bottom: 10px; /* ラベルとラベルの間隔を空ける */
+    font-size: 16px;
+  }
+  
+  input[type="radio"] {
+    margin-right: 10px; /* ラジオボタンとテキストの間隔 */
+  }
+  
+  /* モーダル外をクリックして閉じる場合のスタイル */
+  .modalOverlay:hover {
+    cursor: pointer;
+  }
+  

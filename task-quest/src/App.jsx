@@ -3,6 +3,10 @@ import './App.css'
 import TaskList from './components/TaskList/TaskList';
 import TextArea from './components/TextArea/TextArea';
 import CompTaskList from './components/CompTaskList/CompTaskList';
+import StatusTextArea from './components/Status/StatusTextArea';
+import Status from './components/Status/Status';
+import StatusDeleteModalButton from './components/Status/StatusDeleteModalButton';
+import StatusDeleteModal from './components/Status/StatusDeleteModal';
 
 function App(){
   const [isInputVisible,setIsInputVisible] = useState(false);  //texstarea表示/非表示
@@ -12,13 +16,21 @@ function App(){
   const [taskInput,setTaskInput] = useState("");  //入力されたタスクの内容
   const [tasks,setTasks] = useState([]);  //タスク一覧
   const [tasksDone,setTasksDone] = useState([]);  //完了後タスク一覧
+  const [status,setStatus] = useState([]);  //ステータスの配列
+  const [statusInput, setStatusInput] = useState('');  //ステータスの入力
+  const [selectedValue, setSelectedValue] = useState('');  //ラジオボタンで現在選ばれている値
+  const [statusValueInput, setStatusValueInput] = useState('');  //ステータス値を保持する変数
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);  //ステータス項目の削除モーダルを管理
+  const [selectedDeleteStatus, setSelectedDeleteStatus] = useState('');  //選択されている削除するステータスの項目
 
 
   //タスクを追加する関数
   const addTask = () => {
     if(taskInput.trim() != "") {
-      setTasks([...tasks,taskInput]);
+      const newTask = {name: taskInput, status: selectedValue, value: statusValueInput};
+      setTasks([...tasks,newTask]);
       setTaskInput("");
+      setStatusValueInput('');
     }
     setIsInputVisible(false);
   }
@@ -37,7 +49,7 @@ function App(){
   const editTask = (index) => {
     if(taskEdit.trim() != "") {
       const newTasks = [...tasks];
-      newTasks[index] = taskEdit;
+      newTasks[index].name = taskEdit;
       setTasks(newTasks);
       setTaskEdit("");
     }
@@ -47,9 +59,11 @@ function App(){
   //完了したタスクを別の場所に移す関数
   const doneTask = (index) => {
     const newTasks = tasks.filter((_,i) => i != index);
-    const newtasksDone = [...tasksDone,tasks[index]]
+    const newtasksDone = [...tasksDone,tasks[index]];
     setTasks(newTasks);
-    setTasksDone(newtasksDone)
+    setTasksDone(newtasksDone);
+    const statusIndex = status.findIndex(item => item.name === tasks[index].status);
+    status[statusIndex].value += tasks[index].value;
   }
 
   // 入力モードにする関数
@@ -80,6 +94,35 @@ function App(){
     setTaskEdit(newTaskEdit);
   };
 
+  // statusを追加する関数
+  const addStatus = () => {
+    if(statusInput.trim() != "") {
+      const newItem = { name: statusInput, value: 0 };
+      setStatus([...status, newItem]);
+    }
+    setStatusInput('');
+  }
+
+  const handleDeleteStatusRadioChange = (value) => {
+    setSelectedDeleteStatus(value)
+  }
+
+  // statusを削除する関数
+  const deleteStatus = () => {
+    const newStatus = status.filter(item => item.name != selectedDeleteStatus);
+    setStatus(newStatus);
+    setIsDeleteModalOpen(false);
+  }
+
+  // selectedValueを更新する関数
+  const handleRadioChange = (value) => {
+    setSelectedValue(value)
+  }
+
+  const handleStatusValueChange = (value) => {
+    setStatusValueInput(value);
+  }
+
   return(
     <div className='body'>
       <header className='header'>
@@ -98,7 +141,12 @@ function App(){
       taskEdit={taskEdit}
       editTask={editTask}
       index={index}
-      mode={mode}/>
+      mode={mode}
+      status={status}
+      selectedValue={selectedValue}
+      handleRadioChange={handleRadioChange}
+      statusValueInput={statusValueInput}
+      handleStatusValueChange={handleStatusValueChange}/>
 
       {/* タスク一覧 */}
       <h1>タスク一覧</h1>
@@ -111,6 +159,25 @@ function App(){
       {/* 完了タスク一覧 */}
       <h1>完了タスク一覧</h1>
       <CompTaskList tasksDone={tasksDone}/>
+
+      {/* ステータスインプット */}
+      <h1>ステータス入力欄</h1>
+      <StatusTextArea 
+      statusInput={statusInput} 
+      setStatusInput={setStatusInput} 
+      addStatus={addStatus}/>
+
+      {/* ステータス */}
+      <h1>ステータス</h1>
+      <StatusDeleteModalButton setIsDeleteModalOpen={setIsDeleteModalOpen}/>
+      <StatusDeleteModal 
+      isDeleteModalOpen={isDeleteModalOpen} 
+      status={status} 
+      selectedDeleteStatus={selectedDeleteStatus} 
+      handleDeleteStatusRadioChange={handleDeleteStatusRadioChange} 
+      deleteStatus={deleteStatus}
+      setIsDeleteModalOpen={setIsDeleteModalOpen}/>
+      <Status status={status}/>
     </div>
   );
 }

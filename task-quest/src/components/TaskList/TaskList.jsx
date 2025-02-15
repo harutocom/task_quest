@@ -7,7 +7,9 @@ const TaskList = ({tasks, doneTask, modeEdit, deleteTask}) =>{
         {tasks.map((task, index) => (
             <TaskItem 
             key={index} 
-            task={task} 
+            task={task.name}
+            status={task.status}
+            value={task.value}
             onDone={() => doneTask(index)} 
             modeEdit={() => modeEdit(index)}
             onDelete={() => deleteTask(index)}/>
