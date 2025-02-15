@@ -4,8 +4,6 @@ import TaskList from './components/TaskList/TaskList';
 import TextArea from './components/TextArea/TextArea';
 import CompTaskList from './components/CompTaskList/CompTaskList';
 import Status from './components/Status/Status';
-import StatusDeleteModalButton from './components/Status/StatusDeleteModalButton';
-import StatusDeleteModal from './components/Status/StatusDeleteModal';
 
 function App(){
   const [isInputVisible,setIsInputVisible] = useState(false);  //texstarea表示/非表示
@@ -103,6 +101,7 @@ function App(){
     setIsDeleteModalOpen(false);
   }
 
+  // ステータスを削除するときのラジオボタンの値を更新する関数
   const handleDeleteStatusRadioChange = (value) => {
     setSelectedDeleteStatus(value)
   }
@@ -149,7 +148,6 @@ function App(){
       handleStatusValueChange={handleStatusValueChange}/>
 
       {/* タスク一覧 */}
-      <h1>タスク一覧</h1>
       <TaskList 
       tasks={tasks} 
       doneTask={doneTask} 
@@ -157,30 +155,19 @@ function App(){
       deleteTask={deleteTask}/>
 
       {/* 完了タスク一覧 */}
-      <h1>完了タスク一覧</h1>
       <CompTaskList tasksDone={tasksDone}/>
 
-      {/* ステータスインプット */}
-      {/* <h1>ステータス入力欄</h1>
-      <StatusTextArea 
-      statusInput={statusInput} 
-      setStatusInput={setStatusInput} 
-      addStatus={addStatus}/> */}
-
       {/* ステータス */}
-      <h1>ステータス</h1>
-      <StatusDeleteModalButton setIsDeleteModalOpen={setIsDeleteModalOpen}/>
-      <StatusDeleteModal 
-      isDeleteModalOpen={isDeleteModalOpen} 
-      status={status} 
-      selectedDeleteStatus={selectedDeleteStatus} 
-      handleDeleteStatusRadioChange={handleDeleteStatusRadioChange} 
-      deleteStatus={deleteStatus}
+      <Status
+      status={status}
       setIsDeleteModalOpen={setIsDeleteModalOpen}
+      isDeleteModalOpen={isDeleteModalOpen}
+      selectedDeleteStatus={selectedDeleteStatus}
+      handleDeleteStatusRadioChange={handleDeleteStatusRadioChange}
+      deleteStatus={deleteStatus}
       statusInput={statusInput}
       setStatusInput={setStatusInput}
       addStatus={addStatus}/>
-      <Status status={status}/>
     </div>
   );
 }

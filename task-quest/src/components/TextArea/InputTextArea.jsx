@@ -10,9 +10,11 @@ const InputTextArea = ({onChange, taskInput, addTask, status, selectedValue,
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
+        <h3>追加するQUEST内容を入力してください</h3>
         <input type="text" value={taskInput}
         onChange={(e) => changeTaskInput(e.target.value)}
         placeholder='内容を入力して'/>
+        <h3>完了時に伸びるステータスを選択してください</h3>
         {status.map((status,index) => (
           <label key={index}>
             <input
@@ -24,6 +26,7 @@ const InputTextArea = ({onChange, taskInput, addTask, status, selectedValue,
             {status.name}
           </label>
         ))}
+        <h3>完了時に得られるステータス値を入力してください</h3>
         <input type="number"
         value={statusValueInput}
         onChange={(e) => {

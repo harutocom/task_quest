@@ -3,18 +3,21 @@ import PropTypes from 'prop-types';
 
 const TaskList = ({tasks, doneTask, modeEdit, deleteTask}) =>{
     return (
-    <ul>
-        {tasks.map((task, index) => (
-            <TaskItem 
-            key={index} 
-            task={task.name}
-            status={task.status}
-            value={task.value}
-            onDone={() => doneTask(index)} 
-            modeEdit={() => modeEdit(index)}
-            onDelete={() => deleteTask(index)}/>
-        ))}
-    </ul>
+    <div>
+        <h1>タスク一覧</h1>
+        <ul>
+            {tasks.map((task, index) => (
+                <TaskItem
+                key={index}
+                task={task.name}
+                status={task.status}
+                value={task.value}
+                onDone={() => doneTask(index)}
+                modeEdit={() => modeEdit(index)}
+                onDelete={() => deleteTask(index)}/>
+            ))}
+        </ul>
+    </div>
     )
 };
 

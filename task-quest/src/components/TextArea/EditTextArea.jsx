@@ -1,5 +1,5 @@
-import TaskEdit from '../taskEdit/taskEdit';
 import PropTypes from 'prop-types';
+import styles from '../Status/StatusDeleteModal.module.css'
 
 const EditTextArea = ({onChange, taskEdit, editTask, index}) => {
     const changeTaskEdit = (value) => {
@@ -7,11 +7,14 @@ const EditTextArea = ({onChange, taskEdit, editTask, index}) => {
     };
 
   return (
-    <div className='textarea'>
-    <input type="text" value={taskEdit} 
-    onChange={(e) => changeTaskEdit(e.target.value)}
-    placeholder='内容を入力して'/>
-    <TaskEdit onClick={() => {editTask(index);}}></TaskEdit>
+  <div className={styles.modalOverlay}>
+    <div className={styles.modalContent}>
+      <h3>編集するQUEST内容を入力してください</h3>
+      <input type="text" value={taskEdit}
+      onChange={(e) => changeTaskEdit(e.target.value)}
+      placeholder='内容を入力して'/>
+      <button onClick={() => {editTask(index);}}>編集</button>
+    </div>
   </div>      
   )
 }
