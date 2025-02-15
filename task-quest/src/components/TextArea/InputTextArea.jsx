@@ -1,5 +1,6 @@
 import TaskAdd from '../taskAdd/taskAdd'
 import PropTypes from 'prop-types';
+import styles from '../Status/StatusDeleteModal.module.css'
 
 const InputTextArea = ({onChange, taskInput, addTask, status, selectedValue,
     handleRadioChange, statusValueInput, handleStatusValueChange}) => {
@@ -8,30 +9,33 @@ const InputTextArea = ({onChange, taskInput, addTask, status, selectedValue,
     };
 
   return (
-    <div className='textarea'>
-    <input type="text" value={taskInput} 
-    onChange={(e) => changeTaskInput(e.target.value)}
-    placeholder='内容を入力して'/>
-    {status.map((status,index) => (
-      <label key={index}>
-        <input 
-        type="radio"
-        name='status'
-        value={status.name}
-        checked={selectedValue === status.name}
-        onChange={() => handleRadioChange(status.name)} />
-        {status.name}
-      </label>
-    ))}
-    <input type="number" 
-    value={statusValueInput}
-    onChange={(e) => {
-      const newValue = e.target.value;
-      handleStatusValueChange(newValue === '' ? '' : Number(e.target.value) || 0)}}
-    placeholder='得られるポイントを入力'
-    min={0}/>
-    <TaskAdd onClick={addTask}></TaskAdd>
-  </div>
+    <div className={styles.modalOverlay}>
+      <div className={styles.modalContent}>
+        <input type="text" value={taskInput}
+        onChange={(e) => changeTaskInput(e.target.value)}
+        placeholder='内容を入力して'/>
+        {status.map((status,index) => (
+          <label key={index}>
+            <input
+            type="radio"
+            name='status'
+            value={status.name}
+            checked={selectedValue === status.name}
+            onChange={() => handleRadioChange(status.name)} />
+            {status.name}
+          </label>
+        ))}
+        <input type="number"
+        value={statusValueInput}
+        onChange={(e) => {
+          const newValue = e.target.value;
+          handleStatusValueChange(newValue === '' ? '' : Number(e.target.value) || 0
+        )}}
+        placeholder='得られるポイントを入力'
+        min={0}/>
+        <TaskAdd onClick={addTask}></TaskAdd>
+      </div>
+    </div>
   )
 }
 
