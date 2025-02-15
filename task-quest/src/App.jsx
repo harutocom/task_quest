@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './App.css'
+import './styles/global.css'
 import TaskList from './components/TaskList/TaskList';
 import TextArea from './components/TextArea/TextArea';
 import CompTaskList from './components/CompTaskList/CompTaskList';

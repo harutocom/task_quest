@@ -1,4 +1,3 @@
-import TaskAdd from "../taskAdd/taskAdd"
 import InputTextArea from "./InputTextArea"
 import EditTextArea from "./EditTextArea"
 import PropTypes from 'prop-types';
@@ -10,9 +9,9 @@ function TextArea({setIsInputVisible,modeInput,isInputVisible,changeTaskInput,
     <div>
         {/* テキストエリアを表示するボタン */}
         <div className='taskAddButton-container'>
-        <TaskAdd onClick={() => {
+        <button onClick={() => {
             setIsInputVisible(true)
-            modeInput()} }></TaskAdd>
+            modeInput()} }>QUEST追加</button>
         </div>
         {/* isInputVisibleがtrueの時テキストエリア表示 */}
         {isInputVisible && mode === 0 && (
