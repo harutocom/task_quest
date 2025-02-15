@@ -9,7 +9,7 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: left; /* 中央寄せ */
+    justify-content: center; /* 中央寄せ */
     align-items: flex-start; /* 上寄せ */
     height: 100vh; /* 画面全体を使う */
     background-image: url('../src/assets/background-image.jpg'); /* 背景画像のURL */

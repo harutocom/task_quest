@@ -4,6 +4,7 @@ import TaskList from './components/TaskList/TaskList';
 import TextArea from './components/TextArea/TextArea';
 import CompTaskList from './components/CompTaskList/CompTaskList';
 import Status from './components/Status/Status';
+import Header from './components/Header/Header';
 
 function App(){
   const [isInputVisible,setIsInputVisible] = useState(false);  //texstarea表示/非表示
@@ -124,9 +125,8 @@ function App(){
 
   return(
     <div className='body'>
-      <header className='header'>
-        <h1>Todo</h1>
-      </header>
+      {/* Header */}
+      <Header/>
 
       {/* テキストエリア */}
       <TextArea
