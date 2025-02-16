@@ -128,21 +128,9 @@ function App(){
       {/* Header */}
       <Header/>
 
-      <div className='content'>
 
-        <div className='contentStatus'>
-          {/* ステータス */}
-          <Status
-          status={status}
-          setIsDeleteModalOpen={setIsDeleteModalOpen}
-          isDeleteModalOpen={isDeleteModalOpen}
-          selectedDeleteStatus={selectedDeleteStatus}
-          handleDeleteStatusRadioChange={handleDeleteStatusRadioChange}
-          deleteStatus={deleteStatus}
-          statusInput={statusInput}
-          setStatusInput={setStatusInput}
-          addStatus={addStatus}/>
-        </div>
+
+      <div className='content'>
 
         <div className='contentTask'>
 
@@ -172,10 +160,28 @@ function App(){
           modeEdit={modeEdit}
           deleteTask={deleteTask}/>
 
+        </div>
+
+
+
+        <div className='contentStatus'>
+          {/* ステータス */}
+          <Status
+          status={status}
+          setIsDeleteModalOpen={setIsDeleteModalOpen}
+          isDeleteModalOpen={isDeleteModalOpen}
+          selectedDeleteStatus={selectedDeleteStatus}
+          handleDeleteStatusRadioChange={handleDeleteStatusRadioChange}
+          deleteStatus={deleteStatus}
+          statusInput={statusInput}
+          setStatusInput={setStatusInput}
+          addStatus={addStatus}/>
+
           {/* 完了タスク一覧 */}
           <CompTaskList tasksDone={tasksDone}/>
 
         </div>
+
       </div>
     </div>
   );

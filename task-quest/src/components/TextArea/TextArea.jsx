@@ -9,32 +9,32 @@ function TextArea({setIsInputVisible,modeInput,isInputVisible,changeTaskInput,
   return (
     <div className={styles.textArea}>
         {/* テキストエリアを表示するボタン */}
-        <div className={styles.taskAddButtonContainer}>
+      <div className={styles.taskAddButtonContainer}>
         <button onClick={() => {
-            setIsInputVisible(true)
-            modeInput()} }
-            className={styles.taskAddButton}>QUEST追加</button>
-        </div>
-        {/* isInputVisibleがtrueの時テキストエリア表示 */}
-        {isInputVisible && mode === 0 && (
-        <InputTextArea 
-        onChange={changeTaskInput} 
-        taskInput={taskInput} 
-        addTask={addTask}
-        status={status}
-        selectedValue={selectedValue}
-        handleRadioChange={handleRadioChange}
-        statusValueInput={statusValueInput}
-        handleStatusValueChange={handleStatusValueChange}/>
-        )}
-        {isInputVisible && mode === 1 && (
-        <EditTextArea 
-        onChange={changeTaskEdit} 
-        taskEdit={taskEdit} 
-        editTask={editTask}
-        index={index}/>
-        )}
-</div>
+          setIsInputVisible(true)
+          modeInput()} }
+          className={styles.taskAddButton}>QUEST追加</button>
+      </div>
+      {/* isInputVisibleがtrueの時テキストエリア表示 */}
+      {isInputVisible && mode === 0 && (
+      <InputTextArea 
+      onChange={changeTaskInput} 
+      taskInput={taskInput} 
+      addTask={addTask}
+      status={status}
+      selectedValue={selectedValue}
+      handleRadioChange={handleRadioChange}
+      statusValueInput={statusValueInput}
+      handleStatusValueChange={handleStatusValueChange}/>
+      )}
+      {isInputVisible && mode === 1 && (
+      <EditTextArea 
+      onChange={changeTaskEdit} 
+      taskEdit={taskEdit} 
+      editTask={editTask}
+      index={index}/>
+      )}
+    </div>
   )
 }
 

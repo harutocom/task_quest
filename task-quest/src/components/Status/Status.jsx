@@ -7,7 +7,6 @@ const Status = ({status, setIsDeleteModalOpen, isDeleteModalOpen, selectedDelete
   handleDeleteStatusRadioChange, deleteStatus, statusInput, setStatusInput, addStatus}) => {
   return (
     <div className={styles.status}>
-      <h1>ステータス</h1>
       <StatusDeleteModalButton setIsDeleteModalOpen={setIsDeleteModalOpen}/>
       <StatusDeleteModal 
       isDeleteModalOpen={isDeleteModalOpen} 
@@ -21,14 +20,14 @@ const Status = ({status, setIsDeleteModalOpen, isDeleteModalOpen, selectedDelete
       addStatus={addStatus}/>
       <div className={styles.statusArea}>
         {status.length == 0 ? (
-          <h2>ステータスを追加してください</h2>
+          <h2>ステータスを追加して</h2>
         ):(
         <ul>
           {status.map((statusItem, index) => (<li key={index}>
           {statusItem.name} {' '} {statusItem.value}
           </li>))}
         </ul>
-)}
+        )}
       </div>
     </div>
   )

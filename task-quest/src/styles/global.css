@@ -24,14 +24,25 @@ body {
 }
 
 .contentStatus {
-    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding-top: 20px;
+    flex: 1;
 }
 
 .contentTask {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex: 3;
+    gap: 20px;
+    flex: 1;
+    padding-top: 20px;
+}
+
+.contentTask h1 {
+    margin: 0;
 }
 
 /* h1{
