@@ -128,46 +128,55 @@ function App(){
       {/* Header */}
       <Header/>
 
-      {/* テキストエリア */}
-      <TextArea
-      setIsInputVisible={setIsInputVisible}
-      modeInput={modeInput}
-      isInputVisible={isInputVisible}
-      changeTaskInput={changeTaskInput}
-      taskInput={taskInput}
-      addTask={addTask}
-      changeTaskEdit={changeTaskEdit}
-      taskEdit={taskEdit}
-      editTask={editTask}
-      index={index}
-      mode={mode}
-      status={status}
-      selectedValue={selectedValue}
-      handleRadioChange={handleRadioChange}
-      statusValueInput={statusValueInput}
-      handleStatusValueChange={handleStatusValueChange}/>
+      <div className='content'>
 
-      {/* タスク一覧 */}
-      <TaskList 
-      tasks={tasks} 
-      doneTask={doneTask} 
-      modeEdit={modeEdit}  
-      deleteTask={deleteTask}/>
+        <div className='contentStatus'>
+          {/* ステータス */}
+          <Status
+          status={status}
+          setIsDeleteModalOpen={setIsDeleteModalOpen}
+          isDeleteModalOpen={isDeleteModalOpen}
+          selectedDeleteStatus={selectedDeleteStatus}
+          handleDeleteStatusRadioChange={handleDeleteStatusRadioChange}
+          deleteStatus={deleteStatus}
+          statusInput={statusInput}
+          setStatusInput={setStatusInput}
+          addStatus={addStatus}/>
+        </div>
 
-      {/* 完了タスク一覧 */}
-      <CompTaskList tasksDone={tasksDone}/>
+        <div className='contentTask'>
 
-      {/* ステータス */}
-      <Status
-      status={status}
-      setIsDeleteModalOpen={setIsDeleteModalOpen}
-      isDeleteModalOpen={isDeleteModalOpen}
-      selectedDeleteStatus={selectedDeleteStatus}
-      handleDeleteStatusRadioChange={handleDeleteStatusRadioChange}
-      deleteStatus={deleteStatus}
-      statusInput={statusInput}
-      setStatusInput={setStatusInput}
-      addStatus={addStatus}/>
+          {/* テキストエリア */}
+          <TextArea
+          setIsInputVisible={setIsInputVisible}
+          modeInput={modeInput}
+          isInputVisible={isInputVisible}
+          changeTaskInput={changeTaskInput}
+          taskInput={taskInput}
+          addTask={addTask}
+          changeTaskEdit={changeTaskEdit}
+          taskEdit={taskEdit}
+          editTask={editTask}
+          index={index}
+          mode={mode}
+          status={status}
+          selectedValue={selectedValue}
+          handleRadioChange={handleRadioChange}
+          statusValueInput={statusValueInput}
+          handleStatusValueChange={handleStatusValueChange}/>
+
+          {/* タスク一覧 */}
+          <TaskList
+          tasks={tasks}
+          doneTask={doneTask}
+          modeEdit={modeEdit}
+          deleteTask={deleteTask}/>
+
+          {/* 完了タスク一覧 */}
+          <CompTaskList tasksDone={tasksDone}/>
+
+        </div>
+      </div>
     </div>
   );
 }

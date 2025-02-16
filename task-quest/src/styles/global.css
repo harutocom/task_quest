@@ -19,6 +19,21 @@ body {
     height: 100vh; /* 画面全体に背景を表示 */
 }
 
+.content {
+    display: flex;
+}
+
+.contentStatus {
+    flex: 2;
+}
+
+.contentTask {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 3;
+}
+
 /* h1{
     margin: 0;
 }

@@ -1,17 +1,19 @@
 import InputTextArea from "./InputTextArea"
 import EditTextArea from "./EditTextArea"
 import PropTypes from 'prop-types';
+import styles from './TextArea.module.css'
 
 function TextArea({setIsInputVisible,modeInput,isInputVisible,changeTaskInput,
     taskInput,addTask,changeTaskEdit,taskEdit,editTask,index,mode,status,
     selectedValue, handleRadioChange, statusValueInput, handleStatusValueChange}) {
   return (
-    <div>
+    <div className={styles.textArea}>
         {/* テキストエリアを表示するボタン */}
-        <div className='taskAddButton-container'>
+        <div className={styles.taskAddButtonContainer}>
         <button onClick={() => {
             setIsInputVisible(true)
-            modeInput()} }>QUEST追加</button>
+            modeInput()} }
+            className={styles.taskAddButton}>QUEST追加</button>
         </div>
         {/* isInputVisibleがtrueの時テキストエリア表示 */}
         {isInputVisible && mode === 0 && (
