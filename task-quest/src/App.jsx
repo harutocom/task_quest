@@ -12,9 +12,18 @@ function App(){
   const [mode,setMode] = useState(0);  //入力欄をタスク設定と編集に切り替えるための変数
   const [taskEdit,setTaskEdit] = useState("");  //編集後のタスクの内容
   const [taskInput,setTaskInput] = useState("");  //入力されたタスクの内容
-  const [tasks,setTasks] = useState([]);  //タスク一覧
-  const [tasksDone,setTasksDone] = useState([]);  //完了後タスク一覧
-  const [status,setStatus] = useState([]);  //ステータスの配列
+  const [tasks,setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem('savedTasks');
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });  //タスク一覧
+  const [tasksDone,setTasksDone] = useState(() => {
+    const savedTasksDone = localStorage.getItem('savedTasksDone');
+    return savedTasksDone ? JSON.parse(savedTasksDone) : [];
+  });  //完了後タスク一覧
+  const [status,setStatus] = useState(() => {
+    const savedStatus = localStorage.getItem('savedStatus');
+    return savedStatus ? JSON.parse(savedStatus) : [];
+  });  //ステータスの配列
   const [statusInput, setStatusInput] = useState('');  //ステータスの入力
   const [selectedValue, setSelectedValue] = useState('');  //ラジオボタンで現在選ばれている値
   const [statusValueInput, setStatusValueInput] = useState('');  //ステータス値を保持する変数
@@ -54,14 +63,29 @@ function App(){
     setIsInputVisible(false);
   }
 
-  //完了したタスクを別の場所に移す関数
+  //タスクを完了する関数
   const doneTask = (index) => {
     const newTasks = tasks.filter((_,i) => i != index);
     const newtasksDone = [...tasksDone,tasks[index]];
     setTasks(newTasks);
     setTasksDone(newtasksDone);
+    
     const statusIndex = status.findIndex(item => item.name === tasks[index].status);
-    status[statusIndex].value += tasks[index].value;
+    setStatus(prevStatus => {
+      return prevStatus.map((item, i) => {
+        if (i === statusIndex){
+          return {...item, value: item.value + tasks[index].value};
+        } else {
+          return item
+        }
+      });
+    });
+  }
+
+  // 完了タスクを一覧から削除する関数
+  const deleteTasksDone = (index) => {
+    const newTasksDone = tasksDone.filter((_,i) => i != index);
+    setTasksDone(newTasksDone);
   }
 
   // 入力モードにする関数
@@ -123,6 +147,19 @@ function App(){
     setStatusValueInput(value);
   }
 
+  useEffect(() => {
+    localStorage.setItem('savedTasks', JSON.stringify(tasks));
+  },[tasks])
+
+  useEffect(() => {
+    localStorage.setItem('savedStatus', JSON.stringify(status));
+  },[status])
+
+  useEffect(() => {
+    localStorage.setItem('savedTasksDone', JSON.stringify(tasksDone));
+  },[tasksDone])
+
+
   return(
     <div className='body'>
       {/* Header */}
@@ -178,7 +215,7 @@ function App(){
           addStatus={addStatus}/>
 
           {/* 完了タスク一覧 */}
-          <CompTaskList tasksDone={tasksDone}/>
+          <CompTaskList tasksDone={tasksDone} deleteTasksDone={deleteTasksDone}/>
 
         </div>
 
