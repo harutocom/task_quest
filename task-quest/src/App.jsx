@@ -45,6 +45,7 @@ function App(){
       console.error('tasks is not an array!');
       return;  // tasks が配列でない場合は処理を中断
     }
+    console.log(`index is ${index}`)
     const newTasks = tasks.filter((_,i) => i != index);
     setTasks(newTasks);
   }
@@ -81,8 +82,12 @@ function App(){
         }
       });
     });
+  }
 
-    // status[statusIndex].value += tasks[index].value;
+  // 完了タスクを一覧から削除する関数
+  const deleteTasksDone = (index) => {
+    const newTasksDone = tasksDone.filter((_,i) => i != index);
+    setTasksDone(newTasksDone);
   }
 
   // 入力モードにする関数
@@ -209,7 +214,7 @@ function App(){
           addStatus={addStatus}/>
 
           {/* 完了タスク一覧 */}
-          <CompTaskList tasksDone={tasksDone}/>
+          <CompTaskList tasksDone={tasksDone} deleteTasksDone={deleteTasksDone}/>
 
         </div>
 
