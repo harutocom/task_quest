@@ -16,7 +16,10 @@ function App(){
     const savedTasks = localStorage.getItem('savedTasks');
     return savedTasks ? JSON.parse(savedTasks) : [];
   });  //タスク一覧
-  const [tasksDone,setTasksDone] = useState([]);  //完了後タスク一覧
+  const [tasksDone,setTasksDone] = useState(() => {
+    const savedTasksDone = localStorage.getItem('savedTasksDone');
+    return savedTasksDone ? JSON.parse(savedTasksDone) : [];
+  });  //完了後タスク一覧
   const [status,setStatus] = useState(() => {
     const savedStatus = localStorage.getItem('savedStatus');
     return savedStatus ? JSON.parse(savedStatus) : [];
@@ -45,7 +48,6 @@ function App(){
       console.error('tasks is not an array!');
       return;  // tasks が配列でない場合は処理を中断
     }
-    console.log(`index is ${index}`)
     const newTasks = tasks.filter((_,i) => i != index);
     setTasks(newTasks);
   }
@@ -69,11 +71,7 @@ function App(){
     setTasksDone(newtasksDone);
     
     const statusIndex = status.findIndex(item => item.name === tasks[index].status);
-    
-    console.log(`statusIndex is ${statusIndex}`);
-
     setStatus(prevStatus => {
-      console.log(prevStatus)
       return prevStatus.map((item, i) => {
         if (i === statusIndex){
           return {...item, value: item.value + tasks[index].value};
@@ -154,9 +152,12 @@ function App(){
   },[tasks])
 
   useEffect(() => {
-    localStorage.setItem('savedStatus', JSON.stringify(status))
-    console.log(status)
+    localStorage.setItem('savedStatus', JSON.stringify(status));
   },[status])
+
+  useEffect(() => {
+    localStorage.setItem('savedTasksDone', JSON.stringify(tasksDone));
+  },[tasksDone])
 
 
   return(
