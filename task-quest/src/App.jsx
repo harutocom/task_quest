@@ -12,7 +12,10 @@ function App(){
   const [mode,setMode] = useState(0);  //入力欄をタスク設定と編集に切り替えるための変数
   const [taskEdit,setTaskEdit] = useState("");  //編集後のタスクの内容
   const [taskInput,setTaskInput] = useState("");  //入力されたタスクの内容
-  const [tasks,setTasks] = useState([]);  //タスク一覧
+  const [tasks,setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem('savedTasks');
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });  //タスク一覧
   const [tasksDone,setTasksDone] = useState([]);  //完了後タスク一覧
   const [status,setStatus] = useState([]);  //ステータスの配列
   const [statusInput, setStatusInput] = useState('');  //ステータスの入力
@@ -122,6 +125,10 @@ function App(){
   const handleStatusValueChange = (value) => {
     setStatusValueInput(value);
   }
+
+  useEffect(() => {
+    localStorage.setItem('savedTasks', JSON.stringify(tasks));
+  },[tasks])
 
   return(
     <div className='body'>
