@@ -1,3 +1,40 @@
+
+.status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.statusArea {
+    width: 80%;
+    height: 25vh;
+    padding: 10px;
+    background-color: rgb(0, 0, 0, 0.5);
+    border: 5px solid white;
+    border-radius: 5px;
+}
+
+.statusArea ul {
+    list-style: none;
+    font-size: 32px;
+}
+
+.statusSettingButton {
+    margin: 0;
+    height: 80px;
+    width: 280px;
+    background-color: rgb(0, 0, 0,0.5);
+    border: 5px solid white;
+    font-size: 24px;
+}
+
+
+
+
+
+
 /* モーダルの背景のオーバーレイ */
 .modalOverlay {
     position: fixed;
@@ -9,33 +46,32 @@
     align-items: center; /* 縦方向に中央揃え */
     justify-content: center; /* 横方向に中央揃え */
     z-index: 1000; /* モーダルを最前面に表示 */
-  }
+}
   
-  /* モーダルのコンテンツ部分 */
-  .modalContent {
+/* モーダルのコンテンツ部分 */
+.modalContent {
     background: rgba(0, 0, 0, 0.8);
     padding: 20px;
     border: 5px solid white;
     border-radius: 10px;
-    width: 300px; /* モーダルの幅 */
+    width: 350px; /* モーダルの幅 */
     text-align: center; /* テキストを左揃え */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽いシャドウを追加 */
     overflow-y: auto;
-  }
-  
-  /* ラジオボタンをリスト形式で表示 */
-  label {
+}
+
+/* ラジオボタンをリスト形式で表示 */
+label {
     display: block;
     margin-bottom: 10px; /* ラベルとラベルの間隔を空ける */
     font-size: 16px;
-  }
-  
-  input[type="radio"] {
+}
+
+input[type="radio"] {
     margin-right: 10px; /* ラジオボタンとテキストの間隔 */
-  }
-  
-  /* モーダル外をクリックして閉じる場合のスタイル */
-  .modalOverlay:hover {
+}
+
+/* モーダル外をクリックして閉じる場合のスタイル */
+.modalOverlay:hover {
     cursor: pointer;
-  }
-  
+}

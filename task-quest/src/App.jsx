@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
-import './App.css'
+import './styles/global.css'
 import TaskList from './components/TaskList/TaskList';
 import TextArea from './components/TextArea/TextArea';
 import CompTaskList from './components/CompTaskList/CompTaskList';
-import StatusTextArea from './components/Status/StatusTextArea';
 import Status from './components/Status/Status';
-import StatusDeleteModalButton from './components/Status/StatusDeleteModalButton';
-import StatusDeleteModal from './components/Status/StatusDeleteModal';
+import Header from './components/Header/Header';
 
 function App(){
   const [isInputVisible,setIsInputVisible] = useState(false);  //texstarea表示/非表示
@@ -101,8 +99,10 @@ function App(){
       setStatus([...status, newItem]);
     }
     setStatusInput('');
+    setIsDeleteModalOpen(false);
   }
 
+  // ステータスを削除するときのラジオボタンの値を更新する関数
   const handleDeleteStatusRadioChange = (value) => {
     setSelectedDeleteStatus(value)
   }
@@ -125,59 +125,64 @@ function App(){
 
   return(
     <div className='body'>
-      <header className='header'>
-        <h1>Todo</h1>
-      </header>
+      {/* Header */}
+      <Header/>
 
-      {/* テキストエリア */}
-      <TextArea
-      setIsInputVisible={setIsInputVisible}
-      modeInput={modeInput}
-      isInputVisible={isInputVisible}
-      changeTaskInput={changeTaskInput}
-      taskInput={taskInput}
-      addTask={addTask}
-      changeTaskEdit={changeTaskEdit}
-      taskEdit={taskEdit}
-      editTask={editTask}
-      index={index}
-      mode={mode}
-      status={status}
-      selectedValue={selectedValue}
-      handleRadioChange={handleRadioChange}
-      statusValueInput={statusValueInput}
-      handleStatusValueChange={handleStatusValueChange}/>
 
-      {/* タスク一覧 */}
-      <h1>タスク一覧</h1>
-      <TaskList 
-      tasks={tasks} 
-      doneTask={doneTask} 
-      modeEdit={modeEdit}  
-      deleteTask={deleteTask}/>
 
-      {/* 完了タスク一覧 */}
-      <h1>完了タスク一覧</h1>
-      <CompTaskList tasksDone={tasksDone}/>
+      <div className='content'>
 
-      {/* ステータスインプット */}
-      <h1>ステータス入力欄</h1>
-      <StatusTextArea 
-      statusInput={statusInput} 
-      setStatusInput={setStatusInput} 
-      addStatus={addStatus}/>
+        <div className='contentTask'>
 
-      {/* ステータス */}
-      <h1>ステータス</h1>
-      <StatusDeleteModalButton setIsDeleteModalOpen={setIsDeleteModalOpen}/>
-      <StatusDeleteModal 
-      isDeleteModalOpen={isDeleteModalOpen} 
-      status={status} 
-      selectedDeleteStatus={selectedDeleteStatus} 
-      handleDeleteStatusRadioChange={handleDeleteStatusRadioChange} 
-      deleteStatus={deleteStatus}
-      setIsDeleteModalOpen={setIsDeleteModalOpen}/>
-      <Status status={status}/>
+          {/* テキストエリア */}
+          <TextArea
+          setIsInputVisible={setIsInputVisible}
+          modeInput={modeInput}
+          isInputVisible={isInputVisible}
+          changeTaskInput={changeTaskInput}
+          taskInput={taskInput}
+          addTask={addTask}
+          changeTaskEdit={changeTaskEdit}
+          taskEdit={taskEdit}
+          editTask={editTask}
+          index={index}
+          mode={mode}
+          status={status}
+          selectedValue={selectedValue}
+          handleRadioChange={handleRadioChange}
+          statusValueInput={statusValueInput}
+          handleStatusValueChange={handleStatusValueChange}/>
+
+          {/* タスク一覧 */}
+          <TaskList
+          tasks={tasks}
+          doneTask={doneTask}
+          modeEdit={modeEdit}
+          deleteTask={deleteTask}/>
+
+        </div>
+
+
+
+        <div className='contentStatus'>
+          {/* ステータス */}
+          <Status
+          status={status}
+          setIsDeleteModalOpen={setIsDeleteModalOpen}
+          isDeleteModalOpen={isDeleteModalOpen}
+          selectedDeleteStatus={selectedDeleteStatus}
+          handleDeleteStatusRadioChange={handleDeleteStatusRadioChange}
+          deleteStatus={deleteStatus}
+          statusInput={statusInput}
+          setStatusInput={setStatusInput}
+          addStatus={addStatus}/>
+
+          {/* 完了タスク一覧 */}
+          <CompTaskList tasksDone={tasksDone}/>
+
+        </div>
+
+      </div>
     </div>
   );
 }

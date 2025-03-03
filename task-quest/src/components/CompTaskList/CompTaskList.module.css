@@ -1,0 +1,9 @@
+.compTaskList {
+    width: 80%;
+    height: 25vh;
+    padding: 10px;
+    background-color: rgb(0, 0, 0, 0.5);
+    border: 5px solid white;
+    border-radius: 5px;
+
+}

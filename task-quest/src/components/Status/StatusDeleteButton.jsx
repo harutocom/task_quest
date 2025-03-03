@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 const StatusDeleteButton = ({deleteStatus,setIsDeleteModalOpen}) => {
   return (
     <div>
-        <button onClick={() => setIsDeleteModalOpen(false)}>キャンセル</button>
+        <button onClick={() => setIsDeleteModalOpen(false)}>閉じる</button>
         <button onClick={() => deleteStatus()}>削除</button>
     </div>
   )
