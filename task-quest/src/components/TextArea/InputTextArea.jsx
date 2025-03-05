@@ -1,8 +1,17 @@
+import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../Status/StatusDeleteModal.module.css'
 
 const InputTextArea = ({onChange, taskInput, addTask, status, selectedValue,
     handleRadioChange, statusValueInput, handleStatusValueChange}) => {
+
+      const inputTextRef = useRef();
+      // const inputNumRef = useRef();
+
+      useEffect(() => {
+        inputTextRef.current.focus();
+      },[])
+
     const changeTaskInput = (value) => {
         onChange(value);
     };
@@ -13,7 +22,8 @@ const InputTextArea = ({onChange, taskInput, addTask, status, selectedValue,
         <h3>追加するQUEST内容を入力してください</h3>
         <input type="text" value={taskInput}
         onChange={(e) => changeTaskInput(e.target.value)}
-        placeholder='内容を入力して'/>
+        placeholder='内容を入力して'
+        ref={inputTextRef}/>
         <h3>完了時に伸びるステータスを選択してください</h3>
         {status.map((status,index) => (
           <label key={index}>
